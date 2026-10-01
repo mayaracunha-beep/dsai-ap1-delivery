@@ -16,7 +16,8 @@
 - **Gemini** (Geração de código, especificações e estruturação de prompts)
 
 ## 🚀 Acesso à Aplicação
-- **URL Pública:** [Clique aqui para acessar o DeliveryFast](https://app.netlify.com/drop/meek-sfogliatella-b2ed9e)[cite: 17]
+- **URL Pública:** [Clique aqui para acessar o DeliveryFast](https://app.netlify.com/drop/meek-sfogliatella-b2ed9e)
+
 ## Contagem de Linhas (cloc)
 Resultado da contagem de código executada no repositório:
 
