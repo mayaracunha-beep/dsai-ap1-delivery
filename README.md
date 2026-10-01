@@ -15,9 +15,8 @@
 ## Ferramentas de IA Utilizadas
 - **Gemini** (Geração de código, especificações e estruturação de prompts)
 
-## Como Executar
-1. Clone o repositório.
-2. Abra o arquivo `src/index.html` diretamente em qualquer navegador web.
+## 🚀 Acesso à Aplicação
+- **URL Pública:** [Clique aqui para acessar o DeliveryFast](https://app.netlify.com/drop/meek-sfogliatella-b2ed9e)[cite: 17]
 ## Contagem de Linhas (cloc)
 Resultado da contagem de código executada no repositório:
 
