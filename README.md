@@ -27,6 +27,17 @@ A aplicação está publicada no Netlify e pode ser acessada diretamente pelo en
 
 ## Contagem de Linhas (cloc)
 
-A contagem de linhas de código será realizada utilizando o comando `cloc` definido no enunciado da AP1.
+A contagem foi realizada utilizando o comando definido no enunciado da AP1:
 
-> Resultado da contagem oficial será atualizado após a execução do `cloc`.
+`cloc . --vcs=git --exclude-dir=node_modules,vendor,dist,build,prompts --exclude-lang=Markdown,JSON,YAML,CSV,Text,SVG --not-match-f="(lock|\.min\.)"`
+
+Resultado:
+
+| Linguagem | Arquivos | Linhas em branco | Comentários | Código |
+|---|---:|---:|---:|---:|
+| JavaScript | 8 | 27.993 | 8 | 136.973 |
+| HTML | 1 | 1 | 0 | 42 |
+| Python | 1 | 5 | 2 | 20 |
+| **TOTAL** | **10** | **27.999** | **10** | **137.035** |
+
+**Total de linhas de código válidas: 137.035.**
