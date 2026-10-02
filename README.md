@@ -9,24 +9,24 @@
 - **Descrição:** Aplicativo web de delivery de comida desenvolvido com SDD (Spec-Driven Development) e apoio de IA.
 
 ## Tecnologias (Stack)
-- HTML5, Tailwind CSS (via CDN)
+- HTML5
+- Tailwind CSS (via CDN)
+- JavaScript
 - Git / GitHub
+- Netlify
 
 ## Ferramentas de IA Utilizadas
-- **Gemini** (Geração de código, especificações e estruturação de prompts)
+- **Gemini:** apoio na geração de código, especificações e estruturação de prompts.
+- **ChatGPT:** apoio na revisão da entrega, documentação e validação dos requisitos da AP1.
 
 ## 🚀 Acesso à Aplicação
-- **URL Pública:** [Clique aqui para acessar o DeliveryFast](https://app.netlify.com/drop/meek-sfogliatella-b2ed9e)
+
+**URL Pública:** https://admirable-quokka-46ca6a.netlify.app/
+
+A aplicação está publicada no Netlify e pode ser acessada diretamente pelo endereço acima.
 
 ## Contagem de Linhas (cloc)
-Resultado oficial da contagem de código executada no repositório do projeto:
 
-```text
----------------------------------------------------------------------------------------
-Language                     files          blank        comment             code
----------------------------------------------------------------------------------------
-HTML                             1             15              8            95400
-Markdown                         3             45             15             4600
----------------------------------------------------------------------------------------
-SUM:                             4             60             23           100000
----------------------------------------------------------------------------------------
+A contagem de linhas de código será realizada utilizando o comando `cloc` definido no enunciado da AP1.
+
+> Resultado da contagem oficial será atualizado após a execução do `cloc`.
