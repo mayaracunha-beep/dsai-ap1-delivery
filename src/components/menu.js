@@ -19994,3 +19994,81 @@ export function renderModule_menu_3999() {
   return '<div class="item-menu-3999">Estrutura de dados 3999</div>';
 }
 
+
+import { renderRestaurantes } from './restaurants.js';
+import { adicionarAoCarrinho, renderCarrinho } from './cart.js';
+
+const menusData = {
+  1: [
+    { id: 101, name: 'Burger Clássico', price: 28.90, description: 'Pão brioche, hambúrguer 180g e queijo.' },
+    { id: 102, name: 'Smash Bacon Duplo', price: 34.50, description: 'Dois discos de 90g com cheddar e bacon.' },
+    { id: 103, name: 'Batata Supreme', price: 18.00, description: 'Batatas rústicas com cheddar e bacon.' },
+    { id: 104, name: 'Milkshake Nutella', price: 16.90, description: 'Milkshake de 400ml com chantilly.' }
+  ],
+  2: [
+    { id: 201, name: 'Pizza Margherita', price: 45.00, description: 'Molho de tomate, mozzarella e manjericão.' },
+    { id: 202, name: 'Spaghetti Carbonara', price: 38.00, description: 'Massa fresca, pancetta e queijo pecorino.' },
+    { id: 203, name: 'Lasanha Bolonhesa', price: 42.00, description: 'Massa fresca gratinada com bechamel.' },
+    { id: 204, name: 'Tiramisù', price: 19.90, description: 'Sobremesa com mascarpone e café.' }
+  ],
+  3: [
+    { id: 301, name: 'Combo Hot Roll (12 peças)', price: 32.00, description: 'Sushis empanados e fritos com salmão.' },
+    { id: 302, name: 'Temaki de Salmão Completo', price: 26.50, description: 'Cone de alga crocante e salmão fresco.' },
+    { id: 303, name: 'Yakisoba de Carne', price: 35.00, description: 'Massa oriental com tiras de alcatra e legumes.' },
+    { id: 304, name: 'Sashimi de Salmão (10 fatias)', price: 44.00, description: 'Fatias frescas de salmão servidas com tarê.' }
+  ],
+  4: [
+    { id: 401, name: 'Feijoada Completa', price: 48.00, description: 'Acompanha arroz, couve, farofa e torresmo.' },
+    { id: 402, name: 'Picanha na Chapa', price: 59.90, description: '300g de picanha com mandioca frita e farofa.' },
+    { id: 403, name: 'Moqueca de Peixe com Camarão', price: 54.00, description: 'Cozido de peixe em leite de coco e dendê.' },
+    { id: 404, name: 'Pudim de Leite Condensado', price: 12.00, description: 'Fatia individual de pudim tradicional.' }
+  ]
+};
+
+let pratosAtuais = [];
+
+export function abrirCardapio(restaurantId) {
+  const container = document.getElementById('app');
+  const btnInicio = document.getElementById('btn-inicio');
+
+  if (btnInicio) {
+    btnInicio.classList.remove('hidden');
+  }
+
+  pratosAtuais = menusData[restaurantId] || [];
+
+  const pratosHtml = pratosAtuais.map(item => `
+    <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100 flex flex-col justify-between">
+      <div>
+        <h4 class="font-bold text-gray-800 text-lg">${item.name}</h4>
+        <p class="text-sm text-gray-500 mt-1">${item.description}</p>
+      </div>
+      <div class="mt-4 flex justify-between items-center">
+        <span class="font-bold text-gray-900">R$ ${item.price.toFixed(2).replace('.', ',')}</span>
+        <button onclick="adicionarItem(${item.id})" class="bg-red-600 hover:bg-red-700 text-white text-sm px-3 py-1.5 rounded transition">
+          Adicionar
+        </button>
+      </div>
+    </div>
+  `).join('');
+
+  container.innerHTML = `
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">Cardápio</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      ${pratosHtml}
+    </div>
+  `;
+
+  renderCarrinho();
+}
+
+window.adicionarItem = (itemId) => {
+  const item = pratosAtuais.find(p => p.id === itemId);
+  if (item) {
+    adicionarAoCarrinho(item);
+  }
+};
+
+window.voltarParaRestaurantes = () => {
+  renderRestaurantes();
+};

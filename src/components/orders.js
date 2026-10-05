@@ -19994,3 +19994,100 @@ export function renderModule_orders_3999() {
   return '<div class="item-orders-3999">Estrutura de dados 3999</div>';
 }
 
+
+
+// Recupera os pedidos do localStorage ou inicia vazio
+let historicoPedidos = JSON.parse(localStorage.getItem('deliveryfast_pedidos')) || [
+  {
+    id: 'PED-1024',
+    data: '05/10/2026 às 19:30',
+    restaurante: 'Burger House',
+    status: 'Entregue',
+    statusColor: 'bg-green-100 text-green-800',
+    itens: [
+      { name: 'Burger Clássico', quantidade: 2, price: 28.90 },
+      { name: 'Batata Supreme', quantidade: 1, price: 18.00 }
+    ],
+    total: 75.80
+  }
+];
+
+export function adicionarPedidoAoHistorico(itensCarrinho, total) {
+  const novoPedido = {
+    id: `PED-${Math.floor(1000 + Math.random() * 9000)}`,
+    data: new Date().toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }),
+    restaurante: 'Burger House',
+    status: 'Em preparação',
+    statusColor: 'bg-yellow-100 text-yellow-800',
+    itens: [...itensCarrinho],
+    total: total
+  };
+
+  historicoPedidos.unshift(novoPedido);
+  localStorage.setItem('deliveryfast_pedidos', JSON.stringify(historicoPedidos));
+}
+
+export function renderPedidos() {
+  const container = document.getElementById('app');
+  const btnInicio = document.getElementById('btn-inicio');
+
+  if (btnInicio) {
+    btnInicio.classList.remove('hidden');
+  }
+
+  // Esconde o carrinho flutuante nesta tela
+  const widgetCarrinho = document.getElementById('cart-floating-widget');
+  if (widgetCarrinho) {
+    widgetCarrinho.innerHTML = '';
+  }
+
+  if (historicoPedidos.length === 0) {
+    container.innerHTML = `
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">Meus Pedidos</h2>
+      <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 text-center text-gray-500">
+        <p class="text-xl font-medium mb-2">Você ainda não fez nenhum pedido 🍔</p>
+        <p class="text-sm text-gray-400">Escolha um restaurante no menu e faça o seu primeiro pedido!</p>
+      </div>
+    `;
+    return;
+  }
+
+  const listaPedidosHtml = historicoPedidos.map(pedido => {
+    const itensHtml = pedido.itens.map(item => `
+      <div class="flex justify-between text-sm py-1 border-b border-gray-50 last:border-none">
+        <span class="text-gray-700">${item.quantidade}x ${item.name}</span>
+        <span class="text-gray-500 font-medium">R$ ${(item.price * item.quantidade).toFixed(2).replace('.', ',')}</span>
+      </div>
+    `).join('');
+
+    return `
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 mb-4">
+        <div class="flex flex-wrap justify-between items-center pb-3 border-b mb-3 gap-2">
+          <div>
+            <span class="font-bold text-gray-900 text-lg">${pedido.id}</span>
+            <span class="text-xs text-gray-400 ml-2">• ${pedido.data}</span>
+          </div>
+          <span class="text-xs font-bold px-3 py-1 rounded-full ${pedido.statusColor}">
+            ${pedido.status}
+          </span>
+        </div>
+
+        <div class="mb-4">
+          ${itensHtml}
+        </div>
+
+        <div class="flex justify-between items-center pt-3 border-t">
+          <span class="text-gray-600 font-medium">Total do Pedido:</span>
+          <span class="text-lg font-bold text-red-600">R$ ${pedido.total.toFixed(2).replace('.', ',')}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  container.innerHTML = `
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">Meus Pedidos</h2>
+    <div class="max-w-3xl">
+      ${listaPedidosHtml}
+    </div>
+  `;
+}

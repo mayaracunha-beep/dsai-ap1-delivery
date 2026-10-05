@@ -1,43 +1,39 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeliveryFast - Home</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeliveryFast</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 text-gray-800">
-    <header class="bg-red-600 text-white p-4 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">🍔 DeliveryFast</h1>
-            <nav>
-                <a href="index.html" class="px-3 py-2 hover:bg-red-700 rounded">Início</a>
-                <a href="#" class="px-3 py-2 hover:bg-red-700 rounded">Pedidos</a>
-            </nav>
-        </div>
-    </header>
+<body class="bg-gray-50 min-h-screen text-gray-800">
 
-    <main class="container mx-auto p-6">
-        <section class="mb-8">
-            <h2 class="text-xl font-semibold mb-4">Restaurantes Disponíveis</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-4 rounded-lg shadow border">
-                    <h3 class="font-bold text-lg">Cantina Italiana</h3>
-                    <p class="text-sm text-gray-600">Massas e Pizzas artesanais</p>
-                    <span class="inline-block mt-3 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Entrega grátis</span>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow border">
-                    <h3 class="font-bold text-lg">Burger Master</h3>
-                    <p class="text-sm text-gray-600">Hambúrgueres suculentos</p>
-                    <span class="inline-block mt-3 text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">30-40 min</span>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow border">
-                    <h3 class="font-bold text-lg">Sushi Express</h3>
-                    <p class="text-sm text-gray-600">Comida japonesa fresca</p>
-                    <span class="inline-block mt-3 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Entrega grátis</span>
-                </div>
-            </div>
-        </section>
-    </main>
+  
+  <header class="bg-red-600 text-white shadow-md">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold flex items-center gap-2 cursor-pointer" onclick="voltarParaRestaurantes()">
+        🍔 DeliveryFast
+      </h1>
+
+      
+      <nav class="flex items-center gap-6 font-semibold">
+        <a href="#" id="btn-inicio" onclick="voltarParaRestaurantes()" class="hover:underline hidden">Início</a>
+        <a href="#" onclick="verPedidos()" class="hover:underline">Pedidos</a>
+        
+       
+        <div class="flex items-center gap-1 bg-red-700 px-3 py-1 rounded-full text-sm font-bold">
+          <span>🛒</span>
+          <span id="cart-count">0</span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container mx-auto p-6">
+    <div id="app"></div>
+  </main>
+
+  <script type="module" src="./main.js"></script>
 </body>
 </html>

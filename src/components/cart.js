@@ -1,3 +1,5 @@
+import { adicionarPedidoAoHistorico } from './orders.js';
+
 // Módulo avançado: cart
 export function renderModule_cart_1() {
   console.log('Executando módulo cart parte 1');
@@ -19994,3 +19996,127 @@ export function renderModule_cart_3999() {
   return '<div class="item-cart-3999">Estrutura de dados 3999</div>';
 }
 
+
+
+let carrinho = [];
+
+export function adicionarAoCarrinho(item) {
+  const itemExistente = carrinho.find(cartItem => cartItem.id === item.id);
+  
+  if (itemExistente) {
+    itemExistente.quantidade += 1;
+  } else {
+    carrinho.push({ ...item, quantidade: 1 });
+  }
+
+  atualizarContadorCarrinho();
+  renderCarrinho();
+}
+
+export function removerDoCarrinho(itemId) {
+  carrinho = carrinho.filter(item => item.id !== itemId);
+  atualizarContadorCarrinho();
+  renderCarrinho();
+}
+
+export function alterarQuantidade(itemId, delta) {
+  const item = carrinho.find(cartItem => cartItem.id === itemId);
+  if (item) {
+    item.quantidade += delta;
+    if (item.quantidade <= 0) {
+      removerDoCarrinho(itemId);
+      return;
+    }
+  }
+  atualizarContadorCarrinho();
+  renderCarrinho();
+}
+
+export function atualizarContadorCarrinho() {
+  const contadorEl = document.getElementById('cart-count');
+  if (contadorEl) {
+    const totalItens = carrinho.reduce((sum, item) => sum + item.quantidade, 0);
+    contadorEl.innerText = totalItens;
+  }
+}
+
+export function renderCarrinho() {
+  let container = document.getElementById('cart-floating-widget');
+
+  // Se o container ainda não existir no DOM, cria ele fixo no canto inferior direito
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'cart-floating-widget';
+    container.className = 'fixed bottom-6 right-6 z-50 w-80 sm:w-96 shadow-2xl rounded-xl overflow-hidden transition-all';
+    document.body.appendChild(container);
+  }
+
+  // Se o carrinho estiver vazio, esconde o widget flutuante
+  if (carrinho.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+
+  const total = carrinho.reduce((sum, item) => sum + (item.price * item.quantidade), 0);
+
+  const itensHtml = carrinho.map(item => `
+    <div class="flex justify-between items-center py-2 border-b border-gray-100 text-sm">
+      <div class="truncate max-w-[160px]">
+        <h5 class="font-semibold text-gray-800 truncate">${item.name}</h5>
+        <span class="text-xs text-gray-500">R$ ${item.price.toFixed(2).replace('.', ',')}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="flex items-center border border-gray-200 rounded">
+          <button onclick="alterarQtd(${item.id}, -1)" class="px-2 py-0.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold">-</button>
+          <span class="px-2 text-xs font-semibold">${item.quantidade}</span>
+          <button onclick="alterarQtd(${item.id}, 1)" class="px-2 py-0.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold">+</button>
+        </div>
+        <button onclick="removerItem(${item.id})" class="text-red-500 hover:text-red-700 text-xs font-medium ml-1">✕</button>
+      </div>
+    </div>
+  `).join('');
+
+  container.innerHTML = `
+    <div class="bg-white border border-gray-200 p-4 rounded-xl shadow-lg">
+      <div class="flex justify-between items-center pb-2 border-b mb-2">
+        <h3 class="font-bold text-gray-800 text-sm flex items-center gap-1.5">
+          🛒 Seu Carrinho
+        </h3>
+        <span class="bg-red-100 text-red-700 text-xs px-2 py-0.5 rounded-full font-bold">
+          ${carrinho.reduce((s, i) => s + i.quantidade, 0)} ${carrinho.reduce((s, i) => s + i.quantidade, 0) === 1 ? 'item' : 'itens'}
+        </span>
+      </div>
+
+      <div class="max-h-48 overflow-y-auto pr-1 mb-3">
+        ${itensHtml}
+      </div>
+
+      <div class="flex justify-between items-center text-sm font-bold text-gray-900 pt-2 border-t">
+        <span>Total:</span>
+        <span class="text-red-600 text-base">R$ ${total.toFixed(2).replace('.', ',')}</span>
+      </div>
+
+      <button onclick="finalizarPedido()" class="w-full mt-3 bg-green-600 hover:bg-green-700 text-white font-bold py-2 text-sm rounded-lg transition shadow-sm">
+        Finalizar Pedido
+      </button>
+    </div>
+  `;
+}
+
+window.alterarQtd = (id, delta) => alterarQuantidade(id, delta);
+window.removerItem = (id) => removerDoCarrinho(id);
+
+window.finalizarPedido = () => {
+  if (carrinho.length === 0) return;
+  
+  const total = carrinho.reduce((sum, item) => sum + (item.price * item.quantidade), 0);
+  
+  // Regista o pedido no histórico
+  adicionarPedidoAoHistorico(carrinho, total);
+  
+  alert('🎉 Pedido realizado com sucesso! Você pode acompanhá-lo em "Pedidos".');
+  
+  carrinho = [];
+  atualizarContadorCarrinho();
+  renderCarrinho();
+};
