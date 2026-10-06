@@ -99,12 +99,12 @@ Resultado:
 
 | Linguagem | Arquivos | Linhas em branco | Comentários | Código |
 |---|---:|---:|---:|---:|
-| JavaScript | 12 | 28.143 | 57 | 137.648 |
+| JavaScript | 12 | 28.146 | 57 | 137.682 |
 | HTML | 1 | 6 | 0 | 31 |
 | Python | 1 | 5 | 2 | 20 |
-| **TOTAL** | **14** | **28.154** | **59** | **137.699** |
+| **TOTAL** | **14** | **28.157** | **59** | **137.733** |
 
-**Resultado bruto do comando oficial do cloc: 137.699 linhas de código.**
+**Resultado bruto do comando oficial do cloc: 137.733 linhas de código.**
 
 > Observação: o repositório contém código gerado e estruturas repetitivas utilizadas na composição da volumetria do projeto. A contagem representa o volume de código versionado segundo o comando oficial da atividade e não a quantidade de linhas escritas manualmente.
 
@@ -114,10 +114,8 @@ A contagem dos testes foi realizada separadamente:
 
 ```bash
 cloc tests --exclude-lang=Markdown,JSON,YAML,CSV,Text,SVG
+```
 
-já existe a tabela. Se não existir, acrescente:
-
-```md
 | Linguagem | Arquivos | Linhas em branco | Comentários | Código |
 |---|---:|---:|---:|---:|
 | JavaScript | 1 | 9 | 0 | 34 |
