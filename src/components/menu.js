@@ -19998,38 +19998,162 @@ export function renderModule_menu_3999() {
 import { renderRestaurantes } from './restaurants.js';
 import { adicionarAoCarrinho, renderCarrinho } from './cart.js';
 
-const menusData = {
-  1: [
-    { id: 101, name: 'Burger Clássico', price: 28.90, description: 'Pão brioche, hambúrguer 180g e queijo.' },
-    { id: 102, name: 'Smash Bacon Duplo', price: 34.50, description: 'Dois discos de 90g com cheddar e bacon.' },
-    { id: 103, name: 'Batata Supreme', price: 18.00, description: 'Batatas rústicas com cheddar e bacon.' },
-    { id: 104, name: 'Milkshake Nutella', price: 16.90, description: 'Milkshake de 400ml com chantilly.' }
-  ],
-  2: [
-    { id: 201, name: 'Pizza Margherita', price: 45.00, description: 'Molho de tomate, mozzarella e manjericão.' },
-    { id: 202, name: 'Spaghetti Carbonara', price: 38.00, description: 'Massa fresca, pancetta e queijo pecorino.' },
-    { id: 203, name: 'Lasanha Bolonhesa', price: 42.00, description: 'Massa fresca gratinada com bechamel.' },
-    { id: 204, name: 'Tiramisù', price: 19.90, description: 'Sobremesa com mascarpone e café.' }
-  ],
-  3: [
-    { id: 301, name: 'Combo Hot Roll (12 peças)', price: 32.00, description: 'Sushis empanados e fritos com salmão.' },
-    { id: 302, name: 'Temaki de Salmão Completo', price: 26.50, description: 'Cone de alga crocante e salmão fresco.' },
-    { id: 303, name: 'Yakisoba de Carne', price: 35.00, description: 'Massa oriental com tiras de alcatra e legumes.' },
-    { id: 304, name: 'Sashimi de Salmão (10 fatias)', price: 44.00, description: 'Fatias frescas de salmão servidas com tarê.' }
-  ],
-  4: [
-    { id: 401, name: 'Feijoada Completa', price: 48.00, description: 'Acompanha arroz, couve, farofa e torresmo.' },
-    { id: 402, name: 'Picanha na Chapa', price: 59.90, description: '300g de picanha com mandioca frita e farofa.' },
-    { id: 403, name: 'Moqueca de Peixe com Camarão', price: 54.00, description: 'Cozido de peixe em leite de coco e dendê.' },
-    { id: 404, name: 'Pudim de Leite Condensado', price: 12.00, description: 'Fatia individual de pudim tradicional.' }
-  ]
-};
+// ======================================================
+// DADOS DOS CARDÁPIOS
+// ======================================================
 
+const menusData = {
+
+  // ----------------------------------------------------
+  // RESTAURANTE 1 - BURGER HOUSE
+  // ----------------------------------------------------
+  1: [
+    {
+      id: 101,
+      name: 'Burger Clássico',
+      price: 28.90,
+      description: 'Pão brioche, hambúrguer 180g, queijo, alface e molho especial.',
+      image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 102,
+      name: 'Smash Bacon Duplo',
+      price: 34.50,
+      description: 'Dois hambúrgueres, cheddar cremoso, bacon crocante e molho da casa.',
+      image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 103,
+      name: 'Batata Supreme',
+      price: 18.00,
+      description: 'Batatas crocantes cobertas com cheddar e bacon.',
+      image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 104,
+      name: 'Milkshake de Chocolate',
+      price: 16.90,
+      description: 'Milkshake cremoso de chocolate 400ml com chantilly.',
+      image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80'
+    }
+  ],
+
+  // ----------------------------------------------------
+  // RESTAURANTE 2 - BELLA ITALIA
+  // ----------------------------------------------------
+  2: [
+    {
+      id: 201,
+      name: 'Pizza Margherita',
+      price: 45.00,
+      description: 'Molho de tomate, mozzarella, tomate fresco e manjericão.',
+      image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 202,
+      name: 'Spaghetti Carbonara',
+      price: 38.00,
+      description: 'Massa italiana com pancetta, queijo e molho cremoso.',
+      image: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 203,
+      name: 'Lasanha Bolonhesa',
+      price: 42.00,
+      description: 'Lasanha gratinada com molho bolonhesa e queijo.',
+      image: 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 204,
+      name: 'Tiramisù',
+      price: 19.90,
+      description: 'Sobremesa italiana com mascarpone, café e cacau.',
+      image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=800&q=80'
+    }
+  ],
+
+  // ----------------------------------------------------
+  // RESTAURANTE 3 - SUSHI KAI
+  // ----------------------------------------------------
+3: [
+  {
+    id: 301,
+    name: 'Combo Hot Roll (12 peças)',
+    price: 32.00,
+    description: 'Hot rolls crocantes recheados com salmão.',
+    image: './assets/hotroll.jpg'
+  },
+  {
+    id: 302,
+    name: 'Temaki de Salmão',
+    price: 26.50,
+    description: 'Cone de alga crocante recheado com salmão fresco.',
+    image: './assets/temaki.webp'
+  },
+  {
+    id: 303,
+    name: 'Yakisoba de Carne',
+    price: 35.00,
+    description: 'Macarrão oriental com carne e legumes selecionados.',
+    image: './assets/yakisoba.webp'
+  },
+  {
+    id: 304,
+    name: 'Sashimi de Salmão',
+    price: 44.00,
+    description: '10 fatias de salmão fresco acompanhadas de molho.',
+    image: './assets/sashimi.webp'
+  }
+],
+  // ----------------------------------------------------
+  // RESTAURANTE 4 - SABOR DO BRASIL
+  // ----------------------------------------------------
+ 4: [
+  {
+    id: 401,
+    name: 'Feijoada Completa',
+    price: 48.00,
+    description: 'Feijoada acompanhada de arroz, couve, farofa e laranja.',
+    image: './assets/feijoada.jpg'
+  },
+  {
+    id: 402,
+    name: 'Picanha na Chapa',
+    price: 59.90,
+    description: 'Picanha grelhada acompanhada de mandioca e farofa.',
+    image: './assets/picanha.jpg'
+  },
+  {
+    id: 403,
+    name: 'Moqueca de Peixe',
+    price: 54.00,
+    description: 'Peixe preparado com leite de coco, pimentões e temperos.',
+    image: './assets/moqueca.webp'
+  },
+  {
+    id: 404,
+    name: 'Pudim de Leite',
+    price: 12.00,
+    description: 'Pudim tradicional de leite condensado com calda de caramelo.',
+    image: './assets/pudim.webp'
+  }
+]
+};
+// Guarda temporariamente os pratos do restaurante aberto.
 let pratosAtuais = [];
+
+// ======================================================
+// ABRIR CARDÁPIO
+// ======================================================
 
 export function abrirCardapio(restaurantId) {
   const container = document.getElementById('app');
   const btnInicio = document.getElementById('btn-inicio');
+
+  if (!container) {
+    console.error('Elemento #app não encontrado.');
+    return;
+  }
 
   if (btnInicio) {
     btnInicio.classList.remove('hidden');
@@ -20037,24 +20161,125 @@ export function abrirCardapio(restaurantId) {
 
   pratosAtuais = menusData[restaurantId] || [];
 
-  const pratosHtml = pratosAtuais.map(item => `
-    <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100 flex flex-col justify-between">
-      <div>
-        <h4 class="font-bold text-gray-800 text-lg">${item.name}</h4>
-        <p class="text-sm text-gray-500 mt-1">${item.description}</p>
-      </div>
-      <div class="mt-4 flex justify-between items-center">
-        <span class="font-bold text-gray-900">R$ ${item.price.toFixed(2).replace('.', ',')}</span>
-        <button onclick="adicionarItem(${item.id})" class="bg-red-600 hover:bg-red-700 text-white text-sm px-3 py-1.5 rounded transition">
-          Adicionar
+  if (pratosAtuais.length === 0) {
+    container.innerHTML = `
+      <div class="py-10">
+        <button
+          onclick="voltarParaRestaurantes()"
+          class="text-red-600 font-semibold mb-6"
+        >
+          ← Voltar aos restaurantes
         </button>
+
+        <h2 class="text-2xl font-bold text-gray-800">
+          Cardápio não encontrado
+        </h2>
       </div>
-    </div>
+    `;
+
+    return;
+  }
+
+  const pratosHtml = pratosAtuais.map(item => `
+    <article
+      class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition duration-300"
+    >
+
+      <div class="relative">
+
+        <img
+          src="${item.image}"
+          alt="${item.name}"
+          class="w-full h-48 object-cover"
+          loading="lazy"
+        >
+
+        <span
+          class="absolute top-3 right-3 bg-white px-2 py-1 rounded-full text-xs font-bold shadow"
+        >
+          ⭐ 4.8
+        </span>
+
+      </div>
+
+      <div class="p-5">
+
+        <h4 class="font-bold text-gray-900 text-lg">
+          ${item.name}
+        </h4>
+
+        <p class="text-sm text-gray-500 mt-2 min-h-[40px]">
+          ${item.description}
+        </p>
+
+        <div class="flex items-center gap-3 text-xs text-gray-500 mt-3">
+
+          <span>
+            🕐 25-35 min
+          </span>
+
+          <span>
+            •
+          </span>
+
+          <span class="text-green-600 font-medium">
+            Entrega R$ 4,99
+          </span>
+
+        </div>
+
+        <div class="mt-5 flex justify-between items-center">
+
+          <div>
+
+            <p class="text-xs text-gray-400">
+              a partir de
+            </p>
+
+            <span class="font-bold text-xl text-gray-900">
+              R$ ${item.price.toFixed(2).replace('.', ',')}
+            </span>
+
+          </div>
+
+          <button
+            type="button"
+            onclick="adicionarItem(${item.id})"
+            class="bg-red-600 hover:bg-red-700 active:scale-95 text-white font-semibold px-4 py-2 rounded-xl transition"
+          >
+            + Adicionar
+          </button>
+
+        </div>
+
+      </div>
+
+    </article>
   `).join('');
 
   container.innerHTML = `
-    <h2 class="text-2xl font-bold mb-4 text-gray-800">Cardápio</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+    <div class="mb-6">
+
+      <button
+        type="button"
+        onclick="voltarParaRestaurantes()"
+        class="text-red-600 hover:text-red-700 font-semibold mb-4"
+      >
+        ← Voltar aos restaurantes
+      </button>
+
+      <h2 class="text-3xl font-bold text-gray-900">
+        Cardápio
+      </h2>
+
+      <p class="text-gray-500 mt-1">
+        Escolha seus pratos favoritos
+      </p>
+
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       ${pratosHtml}
     </div>
   `;
@@ -20062,13 +20287,25 @@ export function abrirCardapio(restaurantId) {
   renderCarrinho();
 }
 
-window.adicionarItem = (itemId) => {
-  const item = pratosAtuais.find(p => p.id === itemId);
-  if (item) {
-    adicionarAoCarrinho(item);
+// ======================================================
+// ADICIONAR ITEM AO CARRINHO
+// ======================================================
+
+window.adicionarItem = function (itemId) {
+  const item = pratosAtuais.find(prato => prato.id === itemId);
+
+  if (!item) {
+    console.error('Produto não encontrado:', itemId);
+    return;
   }
+
+  adicionarAoCarrinho(item);
 };
 
-window.voltarParaRestaurantes = () => {
+// ======================================================
+// VOLTAR PARA RESTAURANTES
+// ======================================================
+
+window.voltarParaRestaurantes = function () {
   renderRestaurantes();
 };
