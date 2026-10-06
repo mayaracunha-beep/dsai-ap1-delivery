@@ -25037,3 +25037,7 @@ export function cadastrarUsuario(novoUsuario) {
 export function obterUsuarioLogado() {
   return usuarioLogado;
 }
+export function sairUsuario() {
+  usuarioLogado = null;
+  localStorage.removeItem('df_usuario_logado');
+}

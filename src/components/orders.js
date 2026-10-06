@@ -20013,18 +20013,27 @@ function calcularStatus(dataCriacaoTimestamp) {
   }
 }
 
-export function adicionarPedidoAoHistorico(itensCarrinho, total) {
+export function adicionarPedidoAoHistorico(itensCarrinho, total, nome, endereco) {
   const agora = Date.now();
+
   const novoPedido = {
     id: `PED-${Math.floor(1000 + Math.random() * 9000)}`,
-    timestamp: agora, // Guarda o momento exato da criação
-    data: new Date(agora).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }),
+    timestamp: agora,
+    data: new Date(agora).toLocaleString('pt-BR', {
+      dateStyle: 'short',
+      timeStyle: 'short'
+    }),
     itens: [...itensCarrinho],
-    total: total
+    total: total,
+    nome: nome || '',
+    endereco: endereco || ''
   };
 
   historicoPedidos.unshift(novoPedido);
-  localStorage.setItem('deliveryfast_pedidos', JSON.stringify(historicoPedidos));
+  localStorage.setItem(
+    'deliveryfast_pedidos',
+    JSON.stringify(historicoPedidos)
+  );
 }
 
 window.adicionarPedidoAoHistorico = adicionarPedidoAoHistorico;
@@ -20057,7 +20066,7 @@ export function renderPedidos() {
     return;
   }
 
-  const listaPedidosHtml = historicoPedidos.map(pedido => {
+   const listaPedidosHtml = historicoPedidos.map(pedido => {
     // Se o pedido antigo não tiver timestamp, usa o momento atual para evitar erros
     const timestamp = pedido.timestamp || Date.now();
     const infoStatus = calcularStatus(timestamp);
@@ -20080,6 +20089,12 @@ export function renderPedidos() {
             ${infoStatus.status}
           </span>
         </div>
+                ${pedido.nome ? `
+          <div class="mb-3 text-sm text-gray-600">
+            <p><strong>Cliente:</strong> ${pedido.nome}</p>
+            <p><strong>Endereço:</strong> ${pedido.endereco}</p>
+          </div>
+        ` : ''}
 
         <div class="mb-4">
           ${itensHtml}

@@ -1,6 +1,6 @@
 import { renderRestaurantes } from './components/restaurants.js';
 import { renderPedidos } from './components/orders.js';
-import { obterUsuarioLogado } from './js/database.js';
+import { obterUsuarioLogado, sairUsuario } from './js/database.js';
 
 // Atualiza a área do utilizador na barra de navegação
 export function atualizarNavegacao() {
@@ -10,11 +10,17 @@ export function atualizarNavegacao() {
   if (areaUsuario) {
     if (usuario) {
       areaUsuario.innerHTML = `
-        <div class="flex items-center gap-2 text-gray-800 font-semibold bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">
-          <span class="w-7 h-7 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm">
-            ${usuario.nome.charAt(0).toUpperCase()}
-          </span>
-          <span class="text-sm">Olá, ${usuario.nome.split(' ')[0]}</span>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2 text-gray-800 font-semibold bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">
+            <span class="w-7 h-7 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm">
+              ${usuario.nome.charAt(0).toUpperCase()}
+            </span>
+            <span class="text-sm">Olá, ${usuario.nome.split(' ')[0]}</span>
+          </div>
+
+          <button onclick="window.sairDaConta()" class="text-sm text-red-600 hover:underline font-medium">
+            Sair
+          </button>
         </div>
       `;
     } else {
@@ -36,6 +42,13 @@ window.voltarParaRestaurantes = () => {
   }
   atualizarNavegacao();
 };
+window.sairDaConta = () => {
+  sairUsuario();
+  atualizarNavegacao();
+  renderRestaurantes();
+  alert('Você saiu da conta. Agora outro usuário pode se cadastrar.');
+};
+
 
 // Função para abrir a tela de Pedidos
 window.verPedidos = () => {

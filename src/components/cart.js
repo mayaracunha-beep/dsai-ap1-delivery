@@ -20148,7 +20148,12 @@ if (!validacao.valido) {
 }
 
 if (typeof window.adicionarPedidoAoHistorico === 'function') {
-  window.adicionarPedidoAoHistorico(carrinho, total);
+  window.adicionarPedidoAoHistorico(
+    carrinho,
+    total,
+    pedido.nome,
+    pedido.endereco
+  );
 }
 
   alert(`🎉 Pedido realizado com sucesso para ${usuario.nome}! Você pode acompanhá-lo em "Pedidos".`);
