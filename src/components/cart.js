@@ -19998,6 +19998,8 @@ export function renderModule_cart_3999() {
 
 
 
+import { obterUsuarioLogado } from '../js/database.js';
+
 let carrinho = [];
 
 export function adicionarAoCarrinho(item) {
@@ -20108,14 +20110,29 @@ window.removerItem = (id) => removerDoCarrinho(id);
 
 window.finalizarPedido = () => {
   if (carrinho.length === 0) return;
-  
+
+  // 1. Verifica se existe um utilizador cadastrado/logado
+  const usuario = obterUsuarioLogado();
+
+  if (!usuario) {
+    alert('⚠️️ Você precisa criar uma conta antes de finalizar o pedido!');
+    
+    // Redireciona para a tela de cadastro através da função global
+    if (typeof window.abrirTelaCadastro === 'function') {
+      window.abrirTelaCadastro();
+    }
+    return;
+  }
+
+  // 2. Se o utilizador estiver logado, continua o pedido
   const total = carrinho.reduce((sum, item) => sum + (item.price * item.quantidade), 0);
-  
-  // Regista o pedido no histórico
-  adicionarPedidoAoHistorico(carrinho, total);
-  
-  alert('🎉 Pedido realizado com sucesso! Você pode acompanhá-lo em "Pedidos".');
-  
+
+  if (typeof window.adicionarPedidoAoHistorico === 'function') {
+    window.adicionarPedidoAoHistorico(carrinho, total);
+  }
+
+  alert(`🎉 Pedido realizado com sucesso para ${usuario.nome}! Você pode acompanhá-lo em "Pedidos".`);
+
   carrinho = [];
   atualizarContadorCarrinho();
   renderCarrinho();

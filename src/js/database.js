@@ -25000,3 +25000,40 @@ export const massiveDatabase = [
   { id: 24998, item: 'Produto ID 24998', price: 37497.00, active: true },
   { id: 24999, item: 'Produto ID 24999', price: 37498.50, active: true },
 ];
+
+// Carrega os utilizadores cadastrados do localStorage para não perder ao recarregar a página
+export const usuarios = JSON.parse(localStorage.getItem('df_usuarios') || '[]');
+
+// Guarda/recupera o utilizador atualmente logado
+export let usuarioLogado = JSON.parse(localStorage.getItem('df_usuario_logado') || 'null');
+
+// Função para registar um novo utilizador
+export function cadastrarUsuario(novoUsuario) {
+  const jaExiste = usuarios.some(
+    (u) => u.email.toLowerCase() === novoUsuario.email.toLowerCase()
+  );
+
+  if (jaExiste) {
+    throw new Error('USUARIO JÁ CADASTRADO!');
+  }
+
+  const usuario = {
+    id: Date.now(),
+    ...novoUsuario,
+    dataCadastro: new Date().toLocaleString('pt-BR')
+  };
+
+  usuarios.push(usuario);
+  usuarioLogado = usuario;
+
+  // Guarda as alterações no localStorage
+  localStorage.setItem('df_usuarios', JSON.stringify(usuarios));
+  localStorage.setItem('df_usuario_logado', JSON.stringify(usuarioLogado));
+
+  console.log('Utilizador logado:', usuarioLogado);
+  return usuario;
+}
+
+export function obterUsuarioLogado() {
+  return usuarioLogado;
+}

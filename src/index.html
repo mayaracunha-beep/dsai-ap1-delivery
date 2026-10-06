@@ -9,19 +9,17 @@
 </head>
 <body class="bg-gray-50 min-h-screen text-gray-800">
 
-  
   <header class="bg-red-600 text-white shadow-md">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
       <h1 class="text-2xl font-bold flex items-center gap-2 cursor-pointer" onclick="voltarParaRestaurantes()">
         🍔 DeliveryFast
       </h1>
 
-      
       <nav class="flex items-center gap-6 font-semibold">
         <a href="#" id="btn-inicio" onclick="voltarParaRestaurantes()" class="hover:underline hidden">Início</a>
         <a href="#" onclick="verPedidos()" class="hover:underline">Pedidos</a>
+        <a href="#" onclick="abrirTelaCadastro()" class="hover:underline">Cadastrar</a>
         
-       
         <div class="flex items-center gap-1 bg-red-700 px-3 py-1 rounded-full text-sm font-bold">
           <span>🛒</span>
           <span id="cart-count">0</span>
