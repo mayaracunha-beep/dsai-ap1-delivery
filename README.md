@@ -73,8 +73,11 @@ Atualmente estão documentadas:
 
 - `2026-10-01-visao-geral.md`
 - `2026-10-06-validacao-checkout.md`
+- `2026-10-06-cardapio-visual.md`
 
 A especificação de validação do checkout foi versionada antes da implementação e dos respectivos testes.
+
+A especificação do cardápio visual foi versionada antes da implementação das melhorias visuais correspondentes.
 
 ## Registro de prompts
 
@@ -93,25 +96,39 @@ cloc . --vcs=git --exclude-dir=node_modules,vendor,dist,build,prompts --exclude-
 ```
 
 Resultado:
-| Linguagem | Arquivos | Linhas em branco | Comentários | Código |
-|---|---:|---:|---:|---:|
-| JavaScript | 12 | 28.100 | 32 | 137.459 |
-| HTML | 1 | 6 | 0 | 31 |
-| Python | 1 | 5 | 2 | 20 |
-| **TOTAL** | **14** | **28.111** | **34** | **137.510** |
-
-**Resultado bruto do comando oficial do cloc: 137.510 linhas de código.**
-### Contagem sem o arquivo de dados
-
-Como `src/js/database.js` contém dados gerados, também foi realizada uma contagem excluindo esse arquivo.
-
-Resultado:
 
 | Linguagem | Arquivos | Linhas em branco | Comentários | Código |
 |---|---:|---:|---:|---:|
-| JavaScript | 11 | 28.091 | 27 | 112.434 |
+| JavaScript | 12 | 28.143 | 57 | 137.648 |
 | HTML | 1 | 6 | 0 | 31 |
 | Python | 1 | 5 | 2 | 20 |
-| **TOTAL** | **13** | **28.102** | **29** | **112.485** |
+| **TOTAL** | **14** | **28.154** | **59** | **137.699** |
 
-**Resultado do cloc excluindo `database.js`: 112.485 linhas de código.**
+**Resultado bruto do comando oficial do cloc: 137.699 linhas de código.**
+
+> Observação: o repositório contém código gerado e estruturas repetitivas utilizadas na composição da volumetria do projeto. A contagem representa o volume de código versionado segundo o comando oficial da atividade e não a quantidade de linhas escritas manualmente.
+
+### Contagem dos testes
+
+A contagem dos testes foi realizada separadamente:
+
+```bash
+cloc tests --exclude-lang=Markdown,JSON,YAML,CSV,Text,SVG
+
+já existe a tabela. Se não existir, acrescente:
+
+```md
+| Linguagem | Arquivos | Linhas em branco | Comentários | Código |
+|---|---:|---:|---:|---:|
+| JavaScript | 1 | 9 | 0 | 34 |
+| **TOTAL** | **1** | **9** | **0** | **34** |
+
+Os testes automatizados verificam:
+
+- rejeição de carrinho vazio;
+- rejeição de nome ausente;
+- rejeição de endereço ausente;
+- rejeição de valor total igual ou menor que zero;
+- aceitação de pedido válido.
+
+Os cinco testes de validação do checkout estão passando.
