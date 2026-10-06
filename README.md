@@ -25,19 +25,93 @@
 
 A aplicação está publicada no Netlify e pode ser acessada diretamente pelo endereço acima.
 
+## Como executar o projeto
+
+O DeliveryFast é uma aplicação web desenvolvida com HTML, JavaScript e Tailwind CSS.
+
+Para executar localmente:
+
+1. Clone o repositório.
+2. Acesse a pasta do projeto.
+3. Abra o arquivo `src/index.html` em um navegador.
+
+A versão publicada está disponível em:
+
+https://admirable-quokka-46ca6a.netlify.app/
+
+## Testes automatizados
+
+O projeto possui testes automatizados para as regras de validação do checkout.
+
+Para executar:
+
+```bash
+node tests/checkout-validation.test.js
+```
+
+Os testes verificam:
+
+- rejeição de carrinho vazio;
+- obrigatoriedade do nome do cliente;
+- obrigatoriedade do endereço;
+- rejeição de valor total inválido;
+- aceitação de um pedido válido.
+
+Resultado atual: **5 testes executados com sucesso**.
+
+Contagem atual dos testes pelo cloc:
+
+| Linguagem | Arquivos | Código |
+|---|---:|---:|
+| JavaScript | 1 | 34 |
+
+## Especificações
+
+As especificações utilizadas no desenvolvimento estão armazenadas no diretório `SPEC/`.
+
+Atualmente estão documentadas:
+
+- `2026-10-01-visao-geral.md`
+- `2026-10-06-validacao-checkout.md`
+
+A especificação de validação do checkout foi versionada antes da implementação e dos respectivos testes.
+
+## Registro de prompts
+
+Os registros das interações utilizadas durante o desenvolvimento estão armazenados no diretório:
+
+`prompts/sessoes/`
+
+Os registros devem corresponder às interações efetivamente utilizadas durante o desenvolvimento.
+
 ## Contagem de Linhas (cloc)
 
 A contagem foi realizada utilizando o comando definido no enunciado da AP1:
 
-`cloc . --vcs=git --exclude-dir=node_modules,vendor,dist,build,prompts --exclude-lang=Markdown,JSON,YAML,CSV,Text,SVG --not-match-f="(lock|\.min\.)"`
+```bash
+cloc . --vcs=git --exclude-dir=node_modules,vendor,dist,build,prompts --exclude-lang=Markdown,JSON,YAML,CSV,Text,SVG --not-match-f="(lock|\.min\.)"
+```
+
+Resultado:
+| Linguagem | Arquivos | Linhas em branco | Comentários | Código |
+|---|---:|---:|---:|---:|
+| JavaScript | 12 | 28.100 | 32 | 137.459 |
+| HTML | 1 | 6 | 0 | 31 |
+| Python | 1 | 5 | 2 | 20 |
+| **TOTAL** | **14** | **28.111** | **34** | **137.510** |
+
+**Resultado bruto do comando oficial do cloc: 137.510 linhas de código.**
+### Contagem sem o arquivo de dados
+
+Como `src/js/database.js` contém dados gerados, também foi realizada uma contagem excluindo esse arquivo.
 
 Resultado:
 
 | Linguagem | Arquivos | Linhas em branco | Comentários | Código |
 |---|---:|---:|---:|---:|
-| JavaScript | 8 | 27.993 | 8 | 136.973 |
-| HTML | 1 | 1 | 0 | 42 |
+| JavaScript | 11 | 28.091 | 27 | 112.434 |
+| HTML | 1 | 6 | 0 | 31 |
 | Python | 1 | 5 | 2 | 20 |
-| **TOTAL** | **10** | **27.999** | **10** | **137.035** |
+| **TOTAL** | **13** | **28.102** | **29** | **112.485** |
 
-**Total de linhas de código válidas: 137.035.**
+**Resultado do cloc excluindo `database.js`: 112.485 linhas de código.**
