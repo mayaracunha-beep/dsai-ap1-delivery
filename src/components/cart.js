@@ -1,4 +1,5 @@
 import { adicionarPedidoAoHistorico } from './orders.js';
+import { validarCheckout } from '../js/checkout-validation.js';
 
 // Módulo avançado: cart
 export function renderModule_cart_1() {
@@ -20125,11 +20126,30 @@ window.finalizarPedido = () => {
   }
 
   // 2. Se o utilizador estiver logado, continua o pedido
-  const total = carrinho.reduce((sum, item) => sum + (item.price * item.quantidade), 0);
+  const total = carrinho.reduce(
+  (sum, item) => sum + (item.price * item.quantidade),
+  0
+);
 
-  if (typeof window.adicionarPedidoAoHistorico === 'function') {
-    window.adicionarPedidoAoHistorico(carrinho, total);
-  }
+const endereco = prompt('Digite o endereço de entrega:');
+
+const pedido = {
+  itens: carrinho,
+  nome: usuario.nome || '',
+  endereco: endereco || '',
+  total: total
+};
+
+const validacao = validarCheckout(pedido);
+
+if (!validacao.valido) {
+  alert(validacao.erro);
+  return;
+}
+
+if (typeof window.adicionarPedidoAoHistorico === 'function') {
+  window.adicionarPedidoAoHistorico(carrinho, total);
+}
 
   alert(`🎉 Pedido realizado com sucesso para ${usuario.nome}! Você pode acompanhá-lo em "Pedidos".`);
 
