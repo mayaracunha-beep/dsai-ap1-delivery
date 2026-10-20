@@ -67,6 +67,16 @@ createServer(async (req, res) => {
     res.end(JSON.stringify({ status: 'ok' }));
     return;
   }
+    // API pública para o site DeliveryFast
+  if (req.url === '/api/restaurantes' && req.method === 'GET') {
+    res.writeHead(200, {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Access-Control-Allow-Origin': '*'
+    });
+
+    res.end(JSON.stringify(restaurantes));
+    return;
+  }
 
   if (req.url !== '/mcp') {
     res.writeHead(404);
